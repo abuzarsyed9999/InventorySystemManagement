@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class DBConnection {
     private static final String URL = "jdbc:mysql://localhost:3306/inventory_db?useSSL=false&serverTimezone=UTC";
-    private static final String USERNAME = "root";   // ← Update if needed
-    private static final String PASSWORD = "#Abuzar99";       // ← Update if you have a password
+    private static final String USERNAME = "root";   
+    private static final String PASSWORD = " password";        
 
     public static Connection getConnection() {
         try {
