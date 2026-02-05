@@ -14,7 +14,7 @@ public class SupplierPanel extends JFrame {
     private SupplierDAO supplierDAO = new SupplierDAO();
 
     public SupplierPanel() {
-        setTitle("🚚 Suppliers Management");
+        setTitle(" Suppliers Management");
         setSize(800, 500);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -35,8 +35,8 @@ public class SupplierPanel extends JFrame {
         // Top panel: Search and Refresh
         JPanel topPanel = new JPanel(new FlowLayout());
         JTextField searchField = new JTextField(20);
-        JButton btnSearch = new JButton("🔍 Search");
-        JButton btnRefresh = new JButton("🔄 Refresh");
+        JButton btnSearch = new JButton(" Search");
+        JButton btnRefresh = new JButton(" Refresh");
 
         btnSearch.addActionListener(e -> searchSuppliers(searchField.getText()));
         btnRefresh.addActionListener(e -> loadSuppliers());
@@ -48,9 +48,9 @@ public class SupplierPanel extends JFrame {
 
         // Bottom panel: CRUD buttons
         JPanel bottomPanel = new JPanel();
-        JButton btnAdd = new JButton("➕ Add Supplier");
-        JButton btnEdit = new JButton("✏️ Edit Supplier");
-        JButton btnDelete = new JButton("🗑️ Delete Supplier");
+        JButton btnAdd = new JButton(" Add Supplier");
+        JButton btnEdit = new JButton(" Edit Supplier");
+        JButton btnDelete = new JButton(" Delete Supplier");
 
         btnAdd.addActionListener(e -> addSupplier());
         btnEdit.addActionListener(e -> editSupplier());
@@ -116,16 +116,16 @@ public class SupplierPanel extends JFrame {
             String email = emailField.getText().trim();
 
             if (name.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "❌ Supplier name is required!", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, " Supplier name is required!", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             Supplier supplier = new Supplier(name, contact, email);
             if (supplierDAO.addSupplier(supplier)) {
-                JOptionPane.showMessageDialog(this, "✅ Supplier added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, " Supplier added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 loadSuppliers();
             } else {
-                JOptionPane.showMessageDialog(this, "❌ Failed to add supplier.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, " Failed to add supplier.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -133,7 +133,7 @@ public class SupplierPanel extends JFrame {
     private void editSupplier() {
         int selectedRow = table.getSelectedRow();
         if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(this, "⚠️ Please select a supplier to edit.", "No Selection", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, " Please select a supplier to edit.", "No Selection", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -159,7 +159,7 @@ public class SupplierPanel extends JFrame {
             String email = emailField.getText().trim();
 
             if (name.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "❌ Supplier name is required!", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, " Supplier name is required!", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -167,10 +167,10 @@ public class SupplierPanel extends JFrame {
             supplier.setSupplierId(supplierId);
 
             if (supplierDAO.updateSupplier(supplier)) {
-                JOptionPane.showMessageDialog(this, "✅ Supplier updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, " Supplier updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 loadSuppliers();
             } else {
-                JOptionPane.showMessageDialog(this, "❌ Failed to update supplier.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, " Failed to update supplier.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -178,7 +178,7 @@ public class SupplierPanel extends JFrame {
     private void deleteSupplier() {
         int selectedRow = table.getSelectedRow();
         if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(this, "⚠️ Please select a supplier to delete.", "No Selection", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, " Please select a supplier to delete.", "No Selection", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -191,10 +191,10 @@ public class SupplierPanel extends JFrame {
 
         if (confirm == JOptionPane.YES_OPTION) {
             if (supplierDAO.deleteSupplier(supplierId)) {
-                JOptionPane.showMessageDialog(this, "✅ Supplier deleted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, " Supplier deleted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 loadSuppliers();
             } else {
-                JOptionPane.showMessageDialog(this, "❌ Failed to delete supplier.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, " Failed to delete supplier.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
