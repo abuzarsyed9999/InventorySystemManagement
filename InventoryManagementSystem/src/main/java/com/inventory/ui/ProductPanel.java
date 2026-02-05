@@ -14,7 +14,7 @@ public class ProductPanel extends JFrame {
     private ProductDAO productDAO = new ProductDAO();
 
     public ProductPanel() {
-        setTitle("📦 Products Management");
+        setTitle(" Products Management");
         setSize(900, 600);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -35,9 +35,9 @@ public class ProductPanel extends JFrame {
         // Top panel: Search and Low Stock
         JPanel topPanel = new JPanel(new FlowLayout());
         JTextField searchField = new JTextField(20);
-        JButton btnSearch = new JButton("🔍 Search");
-        JButton btnLowStock = new JButton("⚠️ Low Stock Alert");
-        JButton btnRefresh = new JButton("🔄 Refresh");
+        JButton btnSearch = new JButton("Search");
+        JButton btnLowStock = new JButton(" Low Stock Alert");
+        JButton btnRefresh = new JButton(" Refresh");
 
         btnSearch.addActionListener(e -> searchProducts(searchField.getText()));
         btnLowStock.addActionListener(e -> showLowStock());
@@ -51,9 +51,9 @@ public class ProductPanel extends JFrame {
 
         // Bottom panel: CRUD buttons
         JPanel bottomPanel = new JPanel();
-        JButton btnAdd = new JButton("➕ Add Product");
-        JButton btnEdit = new JButton("✏️ Edit Product");
-        JButton btnDelete = new JButton("🗑️ Delete Product");
+        JButton btnAdd = new JButton(" Add Product");
+        JButton btnEdit = new JButton(" Edit Product");
+        JButton btnDelete = new JButton(" Delete Product");
 
         btnAdd.addActionListener(e -> addProduct());
         btnEdit.addActionListener(e -> editProduct());
@@ -109,7 +109,7 @@ public class ProductPanel extends JFrame {
         tableModel.setRowCount(0);
         List<Product> products = productDAO.getLowStockProducts(10); // threshold = 10
         if (products.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "✅ No low-stock items!", "Low Stock Alert", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, " No low-stock items!", "Low Stock Alert", JOptionPane.INFORMATION_MESSAGE);
         } else {
             for (Product p : products) {
                 tableModel.addRow(new Object[]{
@@ -121,7 +121,7 @@ public class ProductPanel extends JFrame {
                     p.getSupplierId() == 0 ? "None" : p.getSupplierId()
                 });
             }
-            JOptionPane.showMessageDialog(this, "⚠️ Showing items with stock < 10", "Low Stock Alert", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, " Showing items with stock < 10", "Low Stock Alert", JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -150,7 +150,7 @@ public class ProductPanel extends JFrame {
                 int supplierId = Integer.parseInt(supplierField.getText().trim());
 
                 if (name.isEmpty() || category.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "❌ Name and Category are required!", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, " Name and Category are required!", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -158,13 +158,13 @@ public class ProductPanel extends JFrame {
                 product.setSupplierId(supplierId);
 
                 if (productDAO.addProduct(product)) {
-                    JOptionPane.showMessageDialog(this, "✅ Product added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, " Product added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                     loadProducts();
                 } else {
-                    JOptionPane.showMessageDialog(this, "❌ Failed to add product.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, " Failed to add product.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "❌ Invalid number format.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, " Invalid number format.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -172,7 +172,7 @@ public class ProductPanel extends JFrame {
     private void editProduct() {
         int selectedRow = table.getSelectedRow();
         if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(this, "⚠️ Please select a product to edit.", "No Selection", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, " Please select a product to edit.", "No Selection", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -207,7 +207,7 @@ public class ProductPanel extends JFrame {
                 int supplierId = Integer.parseInt(supplierField.getText().trim());
 
                 if (name.isEmpty() || category.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "❌ Name and Category are required!", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, " Name and Category are required!", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -216,13 +216,13 @@ public class ProductPanel extends JFrame {
                 product.setSupplierId(supplierId);
 
                 if (productDAO.updateProduct(product)) {
-                    JOptionPane.showMessageDialog(this, "✅ Product updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, " Product updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                     loadProducts();
                 } else {
-                    JOptionPane.showMessageDialog(this, "❌ Failed to update product.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, " Failed to update product.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "❌ Invalid number format.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, " Invalid number format.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -230,7 +230,7 @@ public class ProductPanel extends JFrame {
     private void deleteProduct() {
         int selectedRow = table.getSelectedRow();
         if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(this, "⚠️ Please select a product to delete.", "No Selection", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, " Please select a product to delete.", "No Selection", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -243,10 +243,10 @@ public class ProductPanel extends JFrame {
 
         if (confirm == JOptionPane.YES_OPTION) {
             if (productDAO.deleteProduct(productId)) {
-                JOptionPane.showMessageDialog(this, "✅ Product deleted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Product deleted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 loadProducts();
             } else {
-                JOptionPane.showMessageDialog(this, "❌ Failed to delete product.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, " Failed to delete product.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
