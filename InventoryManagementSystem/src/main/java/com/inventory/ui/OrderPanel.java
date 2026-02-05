@@ -17,7 +17,7 @@ public class OrderPanel extends JFrame {
     private ProductDAO productDAO = new ProductDAO();
 
     public OrderPanel() {
-        setTitle("📋 Orders Management");
+        setTitle(" Orders Management");
         setSize(900, 550);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -37,9 +37,9 @@ public class OrderPanel extends JFrame {
 
         // Top panel: Type filter and Refresh
         JPanel topPanel = new JPanel(new FlowLayout());
-        JButton btnPurchases = new JButton("📥 Purchases");
-        JButton btnSales = new JButton("📤 Sales");
-        JButton btnAll = new JButton("🔄 All Orders");
+        JButton btnPurchases = new JButton(" Purchases");
+        JButton btnSales = new JButton(" Sales");
+        JButton btnAll = new JButton(" All Orders");
 
         btnPurchases.addActionListener(e -> loadOrdersByType("PURCHASE"));
         btnSales.addActionListener(e -> loadOrdersByType("SALE"));
@@ -51,8 +51,8 @@ public class OrderPanel extends JFrame {
 
         // Bottom panel: Action buttons
         JPanel bottomPanel = new JPanel();
-        JButton btnNewPurchase = new JButton("➕ New Purchase");
-        JButton btnNewSale = new JButton("💰 New Sale");
+        JButton btnNewPurchase = new JButton(" New Purchase");
+        JButton btnNewSale = new JButton(" New Sale");
 
         btnNewPurchase.addActionListener(e -> createOrder("PURCHASE"));
         btnNewSale.addActionListener(e -> createOrder("SALE"));
@@ -115,7 +115,7 @@ public class OrderPanel extends JFrame {
                 String qtyText = quantityField.getText().trim();
 
                 if (pidText.isEmpty() || qtyText.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "❌ Product ID and Quantity are required!", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, " Product ID and Quantity are required!", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -123,26 +123,26 @@ public class OrderPanel extends JFrame {
                 int quantity = Integer.parseInt(qtyText);
 
                 if (quantity <= 0) {
-                    JOptionPane.showMessageDialog(this, "❌ Quantity must be greater than 0!", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, " Quantity must be greater than 0!", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
-                // ✅ CORRECT METHOD: getProductById
+                //  CORRECT METHOD: getProductById
                 Product product = productDAO.getProductById(productId);
                 if (product == null) {
-                    JOptionPane.showMessageDialog(this, "❌ Product ID '" + productId + "' not found!\nCheck Products list for valid IDs.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, " Product ID '" + productId + "' not found!\nCheck Products list for valid IDs.", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
                 // For SALES: check sufficient stock
                 if ("SALE".equals(orderType) && quantity > product.getQuantity()) {
-                    JOptionPane.showMessageDialog(this, "❌ Insufficient stock!\nAvailable: " + product.getQuantity(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, " Insufficient stock!\nAvailable: " + product.getQuantity(), "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
                 Order order = new Order(productId, quantity, orderType);
                 if (orderDAO.addOrder(order)) {
-                    JOptionPane.showMessageDialog(this, "✅ " + action + " order recorded successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, " " + action + " order recorded successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                     
                     // Update product stock
                     int newQuantity = "PURCHASE".equals(orderType) 
@@ -154,10 +154,10 @@ public class OrderPanel extends JFrame {
                     
                     loadAllOrders();
                 } else {
-                    JOptionPane.showMessageDialog(this, "❌ Failed to record order.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, " Failed to record order.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "❌ Please enter valid numbers for Product ID and Quantity.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, " Please enter valid numbers for Product ID and Quantity.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
